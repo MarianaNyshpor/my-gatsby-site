@@ -1,14 +1,13 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import '../../styles.scss';
 
 const WineItem = ({ wine }) => {
   return (
     <div className="site-wine-items">
       <p className="site-wine-theme"></p>
-      <Link to={`/${wine.title}`}>
+      <a href={`/${wine.title}`}>
         <h2 className="site-wine-item-line">{wine.title}</h2>
-      </Link>
+      </a>
       <p className="site-wine-item-line">
         <span className="site-wine-item-grapes-icon site-wine-item-icon"></span>
         <span className="site-wine-item-italic">{wine.designation} {wine.variety}</span>
