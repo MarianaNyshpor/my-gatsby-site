@@ -1,3 +1,3 @@
 <h1 align="center">
-  Gatsby site
+  Gatsby  Source Plugin
 </h1>

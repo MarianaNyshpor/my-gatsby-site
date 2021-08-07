@@ -1,0 +1,260 @@
+$font-stack: Georgia, serif;
+$primary-color: #333;
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+.site-footer-center {
+  text-align: center;
+}
+
+.site-border {
+  max-width: 1000px;
+  margin: 12rem auto 4rem auto;
+  margin-top: clamp(2rem, 10vw, 12rem);
+  background: white url('images/stripes.svg');
+  background-size: 1500px;
+  padding: 5px;
+  padding: clamp(5px, 1vw, 25px);
+  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.044);
+  border: 5px solid white;
+  @media (max-width: 1100px) {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+}
+
+.site-content {
+  background:linen;
+  padding: 2rem;
+}
+
+.site-nav-logo {
+  font-size: 6px;
+  font-size: clamp(1px, 0.65vw, 8px);
+  width: 30em;
+  height: 30em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  margin: 0;
+  --borderSize: 1em;
+  background: white url('images/stripes.svg');
+  background-size: 150em;
+  border: var(--borderSize) solid linen;
+  display: flex;
+  .site-logo-inner {
+    margin: var(--borderSize);
+    flex: 1;
+    background-image: linear-gradient(to bottom right, red, yellow);
+    display: grid;
+    grid-template-rows: 20% 1fr 1fr;
+    align-content: center;
+  }
+  h1 {
+    display: grid;
+    grid-template-rows: 8fr 2fr;
+    align-items: center;
+    margin: 0;
+    grid-row: 2 / span 2;
+    grid-gap: 2em;
+    transform: translateY(-0.7em);
+  }
+  
+  .site-logo-slicks {
+    transform: scale(1.4);
+    display: block;
+    text-shadow: 0.18em 0.18em 0 rgba(0, 0, 0, 0.05);
+    perspective: 100px;
+  }
+  .site-logo-letter {
+    font-size: 5em;
+    color: var(--red);
+    --scale: 1;
+    --rotate: -10deg;
+    --translateX: 0;
+    --translateY: 0;
+    --rotateX: 0deg;
+    transform: scale(var(--scale)) rotate(var(--rotate))
+      translateX(var(--translateX)) translateY(var(--translateY))
+      rotateX(var(--rotateX));
+    display: inline-block;
+    line-height: 1;
+    transition: transform 0.3s;
+    &.S {
+      --translateX: -0.05;
+    }
+    &.l {
+      --rotate: 2deg;
+      --scale: 1.4;
+      --translateX: 0.05em;
+      --translateY: -0.05em;
+    }
+    &.i {
+      --scale: 0.9;
+      --translateY: -0.1em;
+      --translateX: 0.1em;
+    }
+    &.c {
+      --rotate: 3deg;
+      --scale: 0.9;
+      --translateX: 0.1em;
+      --translateY: 0.23em;
+    }
+    &.k {
+      --rotate: -12deg;
+      --scale: 1.2;
+      --translateX: 0.06em;
+    }
+    &.apos {
+      --translateX: 0.1em;
+    }
+    &.s {
+      --rotate: 12deg;
+      --scale: 0.9;
+      --translateY: -0.14em;
+    }
+  }
+}
+
+.site-nav {
+  .site-nav-logo {
+    transform: translateY(-25%);
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    list-style: none;
+    display: grid;
+    justify-items: center;
+    grid-gap: 2rem;
+    align-items: center;
+    margin-top: -6rem;
+  }
+  li {
+    --rotate: -2deg;
+    transform: rotate(var(--rotate));
+    order: 1;
+    &:nth-child(1) {
+      --rotate: 1deg;
+    }
+    &:nth-child(2) {
+      --rotate: -2.5deg;
+    }
+    &:nth-child(4) {
+      --rotate: 2.5deg;
+    }
+    &:hover {
+      --rotate: 3deg;
+    }
+  }
+  a {
+    font-size: 3rem;
+    text-decoration: none;
+    display: block;
+    color: darkred;
+    &:hover {
+      color: var(--red);
+    }
+    @media (max-width: 800px) {
+      font-size: 2rem;
+    }
+  }
+  @media (max-width: 600px) {
+    --columns: 4;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--grey);
+    padding-bottom: 2rem;
+    ul {
+      grid-template-rows: auto auto;
+      grid-template-columns: repeat(var(--columns), 1fr);
+      justify-items: center;
+    }
+    .site-logo-item {
+      order: 0;
+      grid-column: 1 / -1;
+    }
+    .site-nav-logo {
+      transform: none;
+    }
+  }
+  @media (max-width: 500px) {
+    --columns: 2;
+  }
+}
+
+.site-wine-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 15;
+  background-image: linear-gradient(to bottom right, red, yellow);
+  a {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: darkred;
+  }
+}
+
+.site-wine-list {
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  grid-gap: 16;
+  justify-content: space-between;
+}
+
+.site-wine-theme {
+  align-self: center;
+  width: 100px;
+  height: 70px;
+  background-image: url("images/icons-wine.png");
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
+.site-wine-item-price-icon {
+  background-image: url("images/icons-dollar.png");
+}
+
+.site-wine-item-points-icon {
+  background-image: url("images/icons-star.png");
+}
+
+.site-wine-item-grapes-icon {
+  background-image: url("images/icons-grapes.png");
+}
+
+.site-wine-item-icon {
+  align-self: center;
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
+.site-wine-item-line {
+  align-self: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  &.site-wine-item-line-points {
+    align-self: flex-start;
+  }
+  &.site-wine-item-line-price {
+    align-self: flex-end;
+  }
+}
+
+.site-wine-item-number {
+  font-size: 1.5rem;
+  padding-left: 0.5rem;
+}
+
+.site-wine-item-italic {
+  font-style: italic;
+  color: darkred;
+}
