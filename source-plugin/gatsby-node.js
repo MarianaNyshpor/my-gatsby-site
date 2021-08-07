@@ -1,43 +1,94 @@
-const turnWinesIntoPages = async ({ graphql, actions }) => {
-  const path = require('path');
-  const winesTemplate = path.resolve('./src/templates/SingleWine.js');
+const Promise = require('bluebird')
+const path = require('path')
 
-  const { data } = await graphql(`
-    query {
-      allWine {
-        nodes {
-          id
-          description,
-          title,
-          points,
-          taster_name,
-          taster_twitter_handle,
-          designation,
-          variety,
-          region_1,
-          province,
-          country,
-          winery,
-          price
+exports.createPages = ({graphql, actions}) => {
+  const {createPage} = actions
+
+  return new Promise((resolve, reject) => {
+    const winesTemplate = path.resolve('./src/templates/SingleWine.js')
+    resolve (
+      graphql(
+        `
+        query {
+          allWine {
+            nodes {
+              id
+              description,
+              title,
+              points,
+              taster_name,
+              taster_twitter_handle,
+              designation,
+              variety,
+              region_1,
+              province,
+              country,
+              winery,
+              price
+            }
+          }
         }
-      }
-    }
-  `);
-
-  data.allWine.nodes.forEach((wine) => {
-    actions.createPage({
-    path: `/${wine.title}`,
-    component: winesTemplate,
-      context: {
-        title: wine.title,
-      },
-    });
-  });
+        `
+      ).then(result => {
+        if (result.errors) {
+          console.log(result.errors)
+          reject(result.errors)
+        }
+        result.data.allWine.nodes.forEach((wine) => {
+          createPage({
+          path: `/${wine.title}`,
+          component: winesTemplate,
+            context: {
+              title: wine.title,
+            },
+          });
+        });
+      }),
+    )
+  })
 }
 
-exports.createPages = async (params) => {
-  await turnWinesIntoPages(params);
-}
+
+// const turnWinesIntoPages = async ({ graphql, actions }) => {
+//   const path = require('path');
+//   const winesTemplate = path.resolve('./src/templates/SingleWine.js');
+
+//   const { data } = await graphql(`
+//     query {
+//       allWine {
+//         nodes {
+//           id
+//           description,
+//           title,
+//           points,
+//           taster_name,
+//           taster_twitter_handle,
+//           designation,
+//           variety,
+//           region_1,
+//           province,
+//           country,
+//           winery,
+//           price
+//         }
+//       }
+//     }
+//   `);
+
+//   data.allWine.nodes.forEach((wine) => {
+//     actions.createPage({
+//     path: `/${wine.title}`,
+//     component: winesTemplate,
+//       context: {
+//         title: wine.title,
+//       },
+//     });
+//   });
+// }
+
+// exports.createPages = async (params) => {
+//   await turnWinesIntoPages(params);
+// }
 
 const WINE_NODE_TYPE = `Wine`
 exports.sourceNodes = async ({
