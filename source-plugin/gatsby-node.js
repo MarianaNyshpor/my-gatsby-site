@@ -177,11 +177,11 @@ exports.sourceNodes = async ({
   return
 }
 
-const turnWinesIntoPages = async ({ graphql, actions }) => {
+const turnWinesIntoPages = ({ graphql, actions }) => {
   const path = require('path');
   const winesTemplate = path.resolve('./src/pages/wine.js');
 
-  const { data } = await graphql(`
+  const { data } = graphql(`
     query {
       allWine {
         nodes {
@@ -214,6 +214,6 @@ const turnWinesIntoPages = async ({ graphql, actions }) => {
   });
 }
 
-exports.createPages = async (params) => {
-  await turnWinesIntoPages(params);
+exports.createPages = (params) => {
+  turnWinesIntoPages(params);
 }
