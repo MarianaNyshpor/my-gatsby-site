@@ -176,3 +176,44 @@ exports.sourceNodes = async ({
   )
   return
 }
+
+const turnWinesIntoPages = async ({ graphql, actions }) => {
+  const path = require('path');
+  const winesTemplate = path.resolve('./src/pages/wine.js');
+
+  const { data } = await graphql(`
+    query {
+      allWine {
+        nodes {
+          id
+          description,
+          title,
+          points,
+          taster_name,
+          taster_twitter_handle,
+          designation,
+          variety,
+          region_1,
+          province,
+          country,
+          winery,
+          price
+        }
+      }
+    }
+  `);
+
+  data.allWine.nodes.forEach((wine) => {
+    actions.createPage({
+    path: `/${wine.title}`,
+    component: winesTemplate,
+      context: {
+        title: wine.title,
+      },
+    });
+  });
+}
+
+exports.createPages = async (params) => {
+  await turnWinesIntoPages(params);
+}
