@@ -17,7 +17,7 @@ const SingleWinePage = ({ data: { allWine } }) => {
 export default SingleWinePage;
 
 export const query = graphql`
-  query($title: String!) {
+  query($title: String) {
     allWine(filter: {title: {eq: $title}}) {
       nodes {
         id
