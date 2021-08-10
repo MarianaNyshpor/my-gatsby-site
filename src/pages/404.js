@@ -1,5 +1,5 @@
-import * as React from "react"
-import { Link } from "gatsby"
+import React, { useEffect, useState } from "react";
+import { Link } from "gatsby";
 
 const pageStyles = {
   color: "#232129",
@@ -24,6 +24,18 @@ const codeStyles = {
 };
 
 const NotFoundPage = () => {
+  const [isMount, setMount] = useState(false);
+
+  useEffect(() => {
+    setMount(true);
+  }, []);
+
+  if (!isMount) {
+    return (
+        <div>loading</div>
+    );
+  }
+
   return (
     <main style={pageStyles}>
       <title>Not found</title>
