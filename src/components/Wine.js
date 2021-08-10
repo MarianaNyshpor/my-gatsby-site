@@ -5,7 +5,7 @@ const WineItem = ({ wine }) => {
   return (
     <div className="site-wine-items">
       <p className="site-wine-theme"></p>
-      <a href={`/${wine.title}`}>
+      <a href={`/wines/${wine.title}`}>
         <h2 className="site-wine-item-line">{wine.title}</h2>
       </a>
       <p className="site-wine-item-line">
