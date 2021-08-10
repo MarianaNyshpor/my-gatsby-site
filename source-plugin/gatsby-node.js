@@ -178,6 +178,10 @@ exports.sourceNodes = async ({
 }
 
 const turnWinesIntoPages = async ({ graphql, actions }) => {
+  actions.createRedirect({
+    fromPath: "/*",
+    toPath: "/index.html",
+  });
   const path = require('path');
   const winesTemplate = path.resolve('src/pages/wine.js');
 
